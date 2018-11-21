@@ -7,7 +7,23 @@ public class ClassScan {
     public String scan(Class cl){
         StringBuilder sb = new StringBuilder();
         sb.append("\\\\---------------ClassScanner--by--Rafael--2018-----------------------\\\\\n\n");
-        sb.append(Modifier.toString(cl.getModifiers()) + " " + cl.getSimpleName() + "{\n\n");
+
+        String modif = Modifier.toString(cl.getModifiers());
+        String impl = " implements ";
+        sb.append(modif + " " + cl.getSimpleName());
+        if(!modif.contains("interface")){
+            sb.append(" extends " + cl.getSuperclass().getSimpleName());
+        }else{
+            impl = " extends ";
+        }
+        Class[] interfaces = cl.getInterfaces();
+        if(interfaces.length>0){
+            sb.append(impl);
+            for(Class inf : interfaces){
+                sb.append(inf.getSimpleName() + ", ");
+            }
+            sb.append("\b\b{\n\n");
+        }
 
         scanFields(cl,sb);
         scanConstructors(cl, sb);
