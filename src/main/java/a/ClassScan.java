@@ -6,6 +6,7 @@ public class ClassScan {
 
     public String scan(Class cl){
         StringBuilder sb = new StringBuilder();
+        sb.append("\\\\---------------ClassScanner--by--Rafael--2018-----------------------\\\\\n\n");
         sb.append(Modifier.toString(cl.getModifiers()) + " " + cl.getSimpleName() + "{\n\n");
 
         scanFields(cl,sb);
@@ -18,7 +19,7 @@ public class ClassScan {
         sb.append("\\\\ Fields\n");
         Field[] fields = cl.getDeclaredFields();
         for(Field f  : fields){
-            f.setAccessible(true);
+            sb.append("\t");
             String modif = Modifier.toString(f.getModifiers());
             if(modif.length()>0){
                 sb.append(modif + " ");
@@ -32,6 +33,7 @@ public class ClassScan {
         sb.append("\\\\ Constructors\n");
         Constructor[] constructors = cl.getDeclaredConstructors();
         for(Constructor ct : constructors){
+            sb.append("\t");
             String modif = Modifier.toString(ct.getModifiers());
             if(modif.length()>0){
                 sb.append(modif + " ");
@@ -53,7 +55,7 @@ public class ClassScan {
                 }
                 sb.delete(sb.length()-2, sb.length());
             }
-            sb.append(";\n");
+            sb.append("{ ... } \n");
         }
         sb.append("\n");
     }
@@ -62,7 +64,7 @@ public class ClassScan {
         sb.append("\\\\ Methods\n");
         Method[] methods = cl.getDeclaredMethods();
         for(Method m: methods){
-            m.setAccessible(true);
+            sb.append("\t");
             String modif = Modifier.toString(m.getModifiers());
             if(modif.length()>0){
                 sb.append(modif + " ");
@@ -84,7 +86,7 @@ public class ClassScan {
                 }
                 sb.delete(sb.length()-2, sb.length());
             }
-            sb.append(";\n");
+            sb.append("{ ... }\n");
         }
         sb.append("\n");
     }
