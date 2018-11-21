@@ -22,9 +22,9 @@ public class ClassScan {
             for(Class inf : interfaces){
                 sb.append(inf.getSimpleName() + ", ");
             }
-            sb.append("\b\b{\n\n");
+            sb.append("\b\b");
         }
-
+        sb.append("{\n\n");
         scanFields(cl,sb);
         scanConstructors(cl, sb);
         scanMethods(cl, sb);
