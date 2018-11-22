@@ -10,11 +10,12 @@ public class ClassScan {
 
         String modif = Modifier.toString(cl.getModifiers());
         String impl = " implements ";
-        sb.append(modif + " " + cl.getSimpleName());
+        sb.append(modif + " ");
         if(!modif.contains("interface")){
             if(!cl.getSimpleName().equals("Object"))
-            sb.append(" extends " + cl.getSuperclass().getSimpleName());
+            sb.append("class " + cl.getSimpleName() + " extends " + cl.getSuperclass().getSimpleName());
         }else{
+        	sb.append(cl.getSimpleName());
             impl = " extends ";
         }
         Class[] interfaces = cl.getInterfaces();
